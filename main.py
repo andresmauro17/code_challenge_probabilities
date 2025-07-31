@@ -1,7 +1,17 @@
 
+
 import csv
+import logging
 
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+def migrate_database()  :
+    """ this method is used to migrate the database in sqlite3 """
+    logger.info('Starting database migration')
+    
 
 def get_coheficientes()   :
     print('hey')
@@ -25,4 +35,5 @@ def get_coheficientes()   :
 
 
 if __name__ == "__main__":
-    get_coheficientes()
+    migrate_database()
+    # get_coheficientes()
