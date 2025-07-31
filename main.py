@@ -3,6 +3,7 @@
 import sqlite3
 import csv
 import logging
+import os
 
 
 logging.basicConfig(level=logging.INFO)
@@ -12,6 +13,9 @@ DB_FILE_NAME = 'database.db'
 def migrate_database()  :
     """ this method is used to migrate the database in sqlite3 """
     logger.info('Starting database migration')
+    if os.path.exists(DB_FILE_NAME):
+        os.remove(DB_FILE_NAME)
+    return None
     try:
         conn = sqlite3.connect(DB_FILE_NAME)
         cursor = conn.cursor()
