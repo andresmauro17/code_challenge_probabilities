@@ -1,4 +1,7 @@
-
+""" This a script to migrate a database and insert data from a CSV file into it.
+It creates a SQLite database, processes a CSV file to extract coefficients,
+and inserts the processed data into the database.
+"""
 
 import sqlite3
 import csv
@@ -9,6 +12,7 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 DB_FILE_NAME = 'database.db'
+
 
 def migrate_database()-> bool:
     """ this method is used to migrate the database in sqlite3 """
@@ -42,6 +46,7 @@ def migrate_database()-> bool:
             conn.close()
             logger.info('Database connection closed')
 
+
 def insert_data_to_db(records_to_insert)->bool:
     """ this method is used to insert the data into the database """
     logger.info('Starting to insert data into the database')
@@ -64,6 +69,7 @@ def insert_data_to_db(records_to_insert)->bool:
             conn.close()
             logger.info('Database connection closed')
 
+
 def get_coheficientes() -> list[tuple] | None:
     """ this method is used to get the coefficients from the csv file """
     logger.info('Starting to process the CSV file')
@@ -84,8 +90,6 @@ def get_coheficientes() -> list[tuple] | None:
                 coheficiente = float(coheficiente.replace(',', '.'))
                 
                 # print(f'id: {id}, name: {name}, brand: {brand}, score: {score}, coheficiente: {coheficiente}')
-
-
                 probability: float = score * coheficiente
                 records_to_insert.append((id, name, brand, score, coheficiente, probability))
     return records_to_insert

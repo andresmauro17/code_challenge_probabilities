@@ -1,28 +1,30 @@
-Procesamiento y Almacenamiento de Datos CSV
+# CSV Data Processing and Database Storage
 
-Objetivo: Desarrollar una aplicación que lea datos de un archivo CSV, procese uno de sus campos para calcular una probabilidad, y almacene la información resultante en una base de datos.
+### Prerequisites
+- Python 3.7 or higher
+- No external dependencies required (uses only standard library for python)
 
-Contexto: Se le proporcionará un archivo CSV con los siguientes encabezados:
+### Installation
 
-id: Identificador único.
-name: Nombre del elemento, que incluye un coeficiente numérico.
-brand: Marca asociada.
-score: Puntuación.
-probability: Este campo debe ser calculado.
+1. Clone the repository:
+```bash
+git clone https://github.com/andresmauro17/code_challenge_probabilities
+cd code_challenge_probabilities
+```
 
-Tarea:
-Tu misión es crear una aplicación que cumpla con los siguientes puntos:
+2. Ensure you have the CSV file (`import_test.csv`) in the project directory
 
-- Lectura del CSV: La aplicación debe ser capaz de leer y analizar el archivo CSV proporcionado. Descargar aqui
-- Extracción del Coeficiente: El campo name contendrá un nombre junto con un coeficiente numérico. Tu tarea es extraer este coeficiente. Por ejemplo, si name es "Producto A 1.25", el coeficiente a extraer sería 1.25. Puedes asumir que el coeficiente será un número decimal o entero.
-- Cálculo de probability: Usa el coeficiente extraído del campo name para calcular el valor de probability. La fórmula para este cálculo es la siguiente:
-probability=coeficiente x score​
-- Almacenamiento en Base de Datos: Los datos procesados, incluyendo el id, name (original o modificado según tu criterio), brand, score, y la probability calculada, deben ser almacenados en una base de datos de tu elección (por ejemplo, SQLite, PostgreSQL, MySQL, etc.). La estructura de la tabla de la base de datos debe ser lógica y adecuada para los datos.
+### Usage
 
-Tecnologías:
-Puede usar Laravel / python, las librerías, las técnicas y las herramientas que consideres más apropiadas para completar esta tarea.
+Run the main script:
+```bash
+python main.py
+```
 
-Entregables:
+The application will:
+1. Create/recreate the SQLite database (`database.db`)
+2. Process the CSV file (`import_test.csv`)
+3. Insert all processed records into the database
 
-- El código fuente completo de tu solución.
-- Una breve explicación de tus decisiones de diseño y cualquier suposición realizada.
+Note: you can see logs in each step
+
