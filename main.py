@@ -42,6 +42,27 @@ def migrate_database()-> bool:
             conn.close()
             logger.info('Database connection closed')
 
+def insert_data_to_db(records_to_insert)->bool:
+    """ this method is used to insert the data into the database """
+    logger.info('Starting to insert data into the database')
+    conn = None
+    try:
+        conn = sqlite3.connect(DB_FILE_NAME)
+        cursor = conn.cursor()
+        cursor.executemany('''
+            INSERT INTO processed_data (id, name, brand, score, coefficient, probability)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', records_to_insert)
+        conn.commit()
+        logger.info('Data inserted successfully')
+        return True
+    except sqlite3.Error as e:
+        logger.error(f"An error occurred while inserting data: {e}")
+        return False
+    finally:
+        if conn:
+            conn.close()
+            logger.info('Database connection closed')
 
 def get_coheficientes() -> list[tuple] | None:
     """ this method is used to get the coefficients from the csv file """
@@ -74,5 +95,6 @@ if __name__ == "__main__":
     was_migrated: bool = migrate_database()
     if was_migrated:
         records_to_insert: list[tuple] | None = get_coheficientes()
-        print(records_to_insert)
-        
+        # print(records_to_insert)
+        if records_to_insert:
+            insert_data_to_db(records_to_insert)
