@@ -28,3 +28,10 @@ The application will:
 
 Note: you can see logs in each step
 
+### How to see the results
+
+To see the results, just open the database.db  database with a sqlite client
+    You can use this extension in vscode https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer
+
+
+
